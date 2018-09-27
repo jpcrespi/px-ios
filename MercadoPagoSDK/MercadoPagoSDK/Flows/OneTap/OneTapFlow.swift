@@ -65,7 +65,7 @@ final class OneTapFlow: NSObject, PXFlow {
         if let paymentResult = model.paymentResult {
             resultHandler?.finishOneTap(paymentResult: paymentResult, instructionsInfo: model.instructionsInfo)
         } else if let businessResult = model.businessResult {
-            resultHandler?.finishOneTap(businessResult: businessResult)
+            resultHandler?.finishOneTap(businessResult: businessResult, paymentData: model.paymentData)
         } else {
             resultHandler?.finishOneTap(paymentData: model.paymentData)
         }

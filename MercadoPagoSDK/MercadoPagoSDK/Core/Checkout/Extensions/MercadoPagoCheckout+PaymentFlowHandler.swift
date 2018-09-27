@@ -9,6 +9,7 @@
 import Foundation
 
 extension MercadoPagoCheckout: PXPaymentResultHandlerProtocol {
+
     func finishPaymentFlow(error: MPSDKError) {
         guard let reviewScreen = viewModel.pxNavigationHandler.navigationController.viewControllers.last as? PXReviewViewController else {
             return
@@ -31,10 +32,10 @@ extension MercadoPagoCheckout: PXPaymentResultHandlerProtocol {
 
     func finishPaymentFlow(businessResult: PXBusinessResult) {
         self.viewModel.businessResult = businessResult
-            if self.viewModel.pxNavigationHandler.navigationController.viewControllers.last as? PXReviewViewController != nil {
-                PXAnimatedButton.animateButtonWith(status: businessResult.getStatus().getDescription())
-            } else {
-                self.executeNextStep()
-            }
+        if self.viewModel.pxNavigationHandler.navigationController.viewControllers.last as? PXReviewViewController != nil {
+            PXAnimatedButton.animateButtonWith(status: businessResult.getStatus().getDescription())
+        } else {
+            self.executeNextStep()
+        }
     }
 }

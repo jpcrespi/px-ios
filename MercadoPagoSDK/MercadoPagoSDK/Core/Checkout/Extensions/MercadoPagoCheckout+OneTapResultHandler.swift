@@ -29,8 +29,9 @@ extension MercadoPagoCheckout: PXOneTapResultHandlerProtocol {
         self.executeNextStep()
     }
 
-    func finishOneTap(businessResult: PXBusinessResult) {
+    func finishOneTap(businessResult: PXBusinessResult, paymentData: PXPaymentData) {
         self.viewModel.businessResult = businessResult
+        self.viewModel.paymentData = paymentData
         self.executeNextStep()
     }
 }
