@@ -92,6 +92,11 @@
     // Disable bank deals
     [advancedConfig setBankDealsEnabled:NO];
 
+    TestComponent *testComponent = [[TestComponent alloc] init];
+    [advancedConfig setDynamicViewControllersConfiguration: [testComponent getDynamicViewControllersConfiguration]];
+
+    [advancedConfig setDynamicViewsConfiguration: [testComponent getDynamicViewsConfiguration]];
+
     // Set advanced comnfig
     [self.checkoutBuilder setAdvancedConfigurationWithConfig:advancedConfig];
 

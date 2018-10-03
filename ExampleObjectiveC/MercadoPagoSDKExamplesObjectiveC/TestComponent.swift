@@ -9,15 +9,26 @@
 import UIKit
 import MercadoPagoSDKV4
 
-@objc public class TestComponent: NSObject {
-    public func getView() -> UIView {
+@objc public class TestComponent: NSObject, PXDynamicViewControllerCreator, PXDynamicViewCreator {
+    public func getDynamicView(store: PXCheckoutStore) -> UIView? {
+        if let pmName = store.getPaymentData().getPaymentMethod()?.name {
+            return getView(text: pmName, color: .red)
+        }
+        return nil
+    }
+
+    public func getDynamicViewController(store: PXCheckoutStore) -> UIViewController? {
+        return UIViewController(nibName: nil, bundle: nil)
+    }
+
+    public func getView(text: String = "Custom Component", color: UIColor = UIColor.white) -> UIView {
         let frame = CGRect(x: 0, y: 0, width: 500, height: 100)
         let view = UIView(frame: frame)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = color
         let label = UILabel(frame: frame)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Custom Component"
+        label.text = text
         label.font = label.font.withSize(20)
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
@@ -46,5 +57,17 @@ extension TestComponent {
         let bottom = TestComponent()
         let config = PXReviewConfirmConfiguration(itemsEnabled: true, topView: top.getView(), bottomView: bottom.getView())
         return config
+    }
+
+    public func getDynamicViewsConfiguration() -> PXDynamicViewsConfiguration {
+        let configuration = PXDynamicViewsConfiguration()
+        configuration.addDynamicViewCreator(position: .top, creator: self).addDynamicViewCreator(position: .bottom, creator: self)
+        return configuration
+    }
+
+    public func getDynamicViewControllersConfiguration() -> PXDynamicViewControllersConfiguration {
+        let configuration = PXDynamicViewControllersConfiguration()
+        configuration.addDynamicViewControllerCreator(position: .RyC, creator: self)
+        return configuration
     }
 }

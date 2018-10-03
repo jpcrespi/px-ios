@@ -40,4 +40,9 @@ open class PXAdvancedConfiguration: NSObject {
      Enable to preset configurations to customize visualization on the 'Congrats' screen / 'PaymentResult' screen.
      */
     open var paymentResultConfiguration: PXPaymentResultConfiguration = PXPaymentResultConfiguration()
+
+    open var dynamicViewsConfiguration: PXDynamicViewsConfiguration?
+
+    open var dynamicViewControllersConfiguration: PXDynamicViewControllersConfiguration?
+
 }

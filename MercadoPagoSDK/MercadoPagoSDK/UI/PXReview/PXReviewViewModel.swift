@@ -18,14 +18,16 @@ class PXReviewViewModel: NSObject {
 
     internal var amountHelper: PXAmountHelper
     var paymentOptionSelected: PaymentMethodOption
+    var advancedConfiguration: PXAdvancedConfiguration
     var reviewScreenPreference: PXReviewConfirmConfiguration
     var userLogged: Bool
 
-    public init(amountHelper: PXAmountHelper, paymentOptionSelected: PaymentMethodOption, reviewConfirmConfig: PXReviewConfirmConfiguration, userLogged: Bool) {
+    public init(amountHelper: PXAmountHelper, paymentOptionSelected: PaymentMethodOption, advancedConfiguration: PXAdvancedConfiguration, userLogged: Bool) {
         PXReviewViewModel.CUSTOMER_ID = ""
         self.amountHelper = amountHelper
         self.paymentOptionSelected = paymentOptionSelected
-        self.reviewScreenPreference = reviewConfirmConfig
+        self.advancedConfiguration = advancedConfiguration
+        self.reviewScreenPreference = advancedConfiguration.reviewConfirmConfiguration
         self.userLogged = userLogged
     }
 
@@ -393,6 +395,9 @@ extension PXReviewViewModel {
 // MARK: Custom Views
 extension PXReviewViewModel {
     func buildTopCustomView() -> UIView? {
+        if let dynamicCustomView = advancedConfiguration.dynamicViewsConfiguration?.creators[PXDynamicViewPosition.top]?.getDynamicView(store: PXCheckoutStore.sharedInstance) {
+            return buildComponentView(dynamicCustomView)
+        }
         if let customView = reviewScreenPreference.getTopCustomView() {
             return buildComponentView(customView)
         }
@@ -400,6 +405,9 @@ extension PXReviewViewModel {
     }
 
     func buildBottomCustomView() -> UIView? {
+        if let dynamicCustomView = advancedConfiguration.dynamicViewsConfiguration?.creators[PXDynamicViewPosition.bottom]?.getDynamicView(store: PXCheckoutStore.sharedInstance) {
+            return buildComponentView(dynamicCustomView)
+        }
         if let customView = reviewScreenPreference.getBottomCustomView() {
             return buildComponentView(customView)
         }
