@@ -53,21 +53,22 @@ extension TestComponent {
     }
 
     static public func getReviewConfirmConfiguration() -> PXReviewConfirmConfiguration {
-        let top = TestComponent()
-        let bottom = TestComponent()
-        let config = PXReviewConfirmConfiguration(itemsEnabled: true, topView: top.getView(), bottomView: bottom.getView())
+        let test = TestComponent()
+        let config = PXReviewConfirmConfiguration(itemsEnabled: true, topView: test.getView(), bottomView: test.getView())
         return config
     }
 
-    public func getDynamicViewsConfiguration() -> PXDynamicViewsConfiguration {
+    static public func getDynamicViewsConfiguration() -> PXDynamicViewsConfiguration {
+        let testComponent = TestComponent()
         let configuration = PXDynamicViewsConfiguration()
-        configuration.addDynamicViewCreator(position: .top, creator: self).addDynamicViewCreator(position: .bottom, creator: self)
+        configuration.addDynamicViewCreator(position: .TOP_PAYMENT_METHOD_REVIEW_AND_CONFIRM, creator: testComponent).addDynamicViewCreator(position: .BOTTOM_PAYMENT_METHOD_REVIEW_AND_CONFIRM, creator: testComponent)
         return configuration
     }
 
-    public func getDynamicViewControllersConfiguration() -> PXDynamicViewControllersConfiguration {
+    static public func getDynamicViewControllersConfiguration() -> PXDynamicViewControllersConfiguration {
+        let testComponent = TestComponent()
         let configuration = PXDynamicViewControllersConfiguration()
-        configuration.addDynamicViewControllerCreator(position: .RyC, creator: self)
+        configuration.addDynamicViewControllerCreator(position: .DID_ENTER_REVIEW_AND_CONFIRM, creator: testComponent)
         return configuration
     }
 }

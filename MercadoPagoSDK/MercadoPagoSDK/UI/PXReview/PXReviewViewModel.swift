@@ -395,7 +395,7 @@ extension PXReviewViewModel {
 // MARK: Custom Views
 extension PXReviewViewModel {
     func buildTopCustomView() -> UIView? {
-        if let dynamicCustomView = advancedConfiguration.dynamicViewsConfiguration?.creators[PXDynamicViewPosition.top]?.getDynamicView(store: PXCheckoutStore.sharedInstance) {
+        if let dynamicCustomView = advancedConfiguration.dynamicViewsConfiguration?.creators[PXDynamicViewPosition.TOP_PAYMENT_METHOD_REVIEW_AND_CONFIRM]?.getDynamicView(store: PXCheckoutStore.sharedInstance) {
             return buildComponentView(dynamicCustomView)
         }
         if let customView = reviewScreenPreference.getTopCustomView() {
@@ -405,7 +405,7 @@ extension PXReviewViewModel {
     }
 
     func buildBottomCustomView() -> UIView? {
-        if let dynamicCustomView = advancedConfiguration.dynamicViewsConfiguration?.creators[PXDynamicViewPosition.bottom]?.getDynamicView(store: PXCheckoutStore.sharedInstance) {
+        if let dynamicCustomView = advancedConfiguration.dynamicViewsConfiguration?.creators[PXDynamicViewPosition.BOTTOM_PAYMENT_METHOD_REVIEW_AND_CONFIRM]?.getDynamicView(store: PXCheckoutStore.sharedInstance) {
             return buildComponentView(dynamicCustomView)
         }
         if let customView = reviewScreenPreference.getBottomCustomView() {
