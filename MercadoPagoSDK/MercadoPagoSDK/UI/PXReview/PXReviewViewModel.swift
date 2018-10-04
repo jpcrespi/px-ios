@@ -394,20 +394,28 @@ extension PXReviewViewModel {
 
 // MARK: Custom Views
 extension PXReviewViewModel {
-    func buildTopCustomView() -> UIView? {
+    func buildTopDynamicCustomView() -> UIView? {
         if let dynamicCustomView = advancedConfiguration.dynamicViewsConfiguration?.creators[PXDynamicViewPosition.TOP_PAYMENT_METHOD_REVIEW_AND_CONFIRM]?.getDynamicView(store: PXCheckoutStore.sharedInstance) {
             return buildComponentView(dynamicCustomView)
         }
+        return nil
+    }
+
+    func buildTopCustomView() -> UIView? {
         if let customView = reviewScreenPreference.getTopCustomView() {
             return buildComponentView(customView)
         }
         return nil
     }
 
-    func buildBottomCustomView() -> UIView? {
+    func buildBottomDynamicCustomView() -> UIView? {
         if let dynamicCustomView = advancedConfiguration.dynamicViewsConfiguration?.creators[PXDynamicViewPosition.BOTTOM_PAYMENT_METHOD_REVIEW_AND_CONFIRM]?.getDynamicView(store: PXCheckoutStore.sharedInstance) {
             return buildComponentView(dynamicCustomView)
         }
+        return nil
+    }
+
+    func buildBottomCustomView() -> UIView? {
         if let customView = reviewScreenPreference.getBottomCustomView() {
             return buildComponentView(customView)
         }

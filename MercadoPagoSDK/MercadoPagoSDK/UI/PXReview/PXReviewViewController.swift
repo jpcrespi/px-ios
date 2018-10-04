@@ -153,6 +153,15 @@ extension PXReviewViewController {
             itemView.addSeparatorLineToBottom(height: 1)
         }
 
+        // Top Dynamic Custom View
+        if let topDynamicCustomView = getTopDynamicCustomView() {
+            topDynamicCustomView.addSeparatorLineToBottom(height: 1)
+            topDynamicCustomView.clipsToBounds = true
+            contentView.addSubviewToBottom(topDynamicCustomView)
+            PXLayout.matchWidth(ofView: topDynamicCustomView).isActive = true
+            PXLayout.centerHorizontally(view: topDynamicCustomView).isActive = true
+        }
+
         // Top Custom View
         if let topCustomView = getTopCustomView() {
             topCustomView.addSeparatorLineToBottom(height: 1)
@@ -168,6 +177,15 @@ extension PXReviewViewController {
             contentView.addSubviewToBottom(paymentMethodView)
             PXLayout.matchWidth(ofView: paymentMethodView).isActive = true
             PXLayout.centerHorizontally(view: paymentMethodView).isActive = true
+        }
+
+        // Bottom Dynamic Custom View
+        if let bottomDynamicCustomView = getBottomDynamicCustomView() {
+            bottomDynamicCustomView.addSeparatorLineToBottom(height: 1)
+            bottomDynamicCustomView.clipsToBounds = true
+            contentView.addSubviewToBottom(bottomDynamicCustomView)
+            PXLayout.matchWidth(ofView: bottomDynamicCustomView).isActive = true
+            PXLayout.centerHorizontally(view: bottomDynamicCustomView).isActive = true
         }
 
         // Bottom Custom View
@@ -320,8 +338,16 @@ extension PXReviewViewController {
         return termsAndConditionView
     }
 
+    fileprivate func getTopDynamicCustomView() -> UIView? {
+        return viewModel.buildTopDynamicCustomView()
+    }
+
     fileprivate func getTopCustomView() -> UIView? {
         return viewModel.buildTopCustomView()
+    }
+
+    fileprivate func getBottomDynamicCustomView() -> UIView? {
+        return viewModel.buildBottomDynamicCustomView()
     }
 
     fileprivate func getBottomCustomView() -> UIView? {
