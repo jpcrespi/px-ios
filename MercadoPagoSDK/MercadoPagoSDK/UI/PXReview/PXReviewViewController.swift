@@ -31,7 +31,8 @@ class PXReviewViewController: PXComponentContainerViewController {
     weak var loadingFloatingButtonComponent: PXAnimatedButton?
     let timeOutPayButton: TimeInterval
     let shouldAnimatePayButton: Bool
-    fileprivate let SHADOW_DELTA: CGFloat = 1
+    private let SHADOW_DELTA: CGFloat = 1
+    private var DID_ENTER_DYNAMIC_VIEW_CONTROLLER_SHOWED: Bool = false
 
     internal var changePaymentMethodCallback: (() -> Void)?
 
@@ -65,8 +66,10 @@ class PXReviewViewController: PXComponentContainerViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let dynamicViewController = viewModel.advancedConfiguration.dynamicViewControllersConfiguration?.creators[PXDynamicViewControllerPosition.DID_ENTER_REVIEW_AND_CONFIRM]?.getDynamicViewController(store: PXCheckoutStore.sharedInstance) {
-            PXComponentFactory.Modal.show(viewController: dynamicViewController, title: nil)
+        if !DID_ENTER_DYNAMIC_VIEW_CONTROLLER_SHOWED, let dynamicViewController = viewModel.advancedConfiguration.dynamicViewControllersConfiguration?.creators[PXDynamicViewControllerPosition.DID_ENTER_REVIEW_AND_CONFIRM]?.getDynamicViewController(store: PXCheckoutStore.sharedInstance) {
+            self.present(dynamicViewController, animated: true, completion: {
+                self.DID_ENTER_DYNAMIC_VIEW_CONTROLLER_SHOWED = true
+            })
         }
     }
 

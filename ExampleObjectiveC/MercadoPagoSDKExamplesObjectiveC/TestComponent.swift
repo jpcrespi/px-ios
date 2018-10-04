@@ -9,10 +9,30 @@
 import UIKit
 import MercadoPagoSDKV4
 
+class ClosureSleeve {
+    let closure: () -> Void
+
+    init (_ closure: @escaping () -> Void) {
+        self.closure = closure
+    }
+
+    @objc func invoke () {
+        closure()
+    }
+}
+
+extension UIControl {
+    func add (for controlEvents: UIControlEvents, _ closure: @escaping () -> Void) {
+        let sleeve = ClosureSleeve(closure)
+        addTarget(sleeve, action: #selector(ClosureSleeve.invoke), for: controlEvents)
+        objc_setAssociatedObject(self, String(format: "[%d]", arc4random()), sleeve, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+    }
+}
+
 @objc public class TestComponent: NSObject, PXDynamicViewControllerCreator, PXDynamicViewCreator {
     public func getDynamicView(store: PXCheckoutStore) -> UIView? {
         if let pmName = store.getPaymentData().getPaymentMethod()?.name {
-            return getView(text: pmName, color: .red)
+            return getView(text: "Dynamic Custom View - PM:\(pmName)", color: .white)
         }
         return nil
     }
@@ -22,6 +42,19 @@ import MercadoPagoSDKV4
         vc.view.backgroundColor = .blue
         NSLayoutConstraint(item: vc.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
         NSLayoutConstraint(item: vc.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Dismiss", for: .normal)
+        button.add(for: .touchUpInside) {
+            vc.dismiss(animated: true, completion: nil)
+        }
+
+        vc.view.addSubview(button)
+
+        NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: vc.view, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0).isActive = true
+
+        NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: vc.view, attribute: NSLayoutAttribute.centerY, multiplier: 1.0, constant: 0).isActive = true
 
         return vc
     }
