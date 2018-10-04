@@ -18,7 +18,12 @@ import MercadoPagoSDKV4
     }
 
     public func getDynamicViewController(store: PXCheckoutStore) -> UIViewController? {
-        return UIViewController(nibName: nil, bundle: nil)
+        let vc = UIViewController()
+        vc.view.backgroundColor = .blue
+        NSLayoutConstraint(item: vc.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200).isActive = true
+        NSLayoutConstraint(item: vc.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100).isActive = true
+
+        return vc
     }
 
     public func getView(text: String = "Custom Component", color: UIColor = UIColor.white) -> UIView {
@@ -46,15 +51,14 @@ import MercadoPagoSDKV4
 // MARK: Mock configurations (Ex-preferences).
 extension TestComponent {
     static public func getPaymentResultConfiguration() -> PXPaymentResultConfiguration {
-        let top = TestComponent()
-        let bottom = TestComponent()
-        let paymentConfig = PXPaymentResultConfiguration(topView: top.getView(), bottomView: bottom.getView())
+        let testComponent = TestComponent()
+        let paymentConfig = PXPaymentResultConfiguration(topView: testComponent.getView(), bottomView: testComponent.getView())
         return paymentConfig
     }
 
     static public func getReviewConfirmConfiguration() -> PXReviewConfirmConfiguration {
-        let test = TestComponent()
-        let config = PXReviewConfirmConfiguration(itemsEnabled: true, topView: test.getView(), bottomView: test.getView())
+        let testComponent = TestComponent()
+        let config = PXReviewConfirmConfiguration(itemsEnabled: true, topView: testComponent.getView(), bottomView: testComponent.getView())
         return config
     }
 

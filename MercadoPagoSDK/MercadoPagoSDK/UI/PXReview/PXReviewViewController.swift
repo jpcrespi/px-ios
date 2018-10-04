@@ -63,6 +63,13 @@ class PXReviewViewController: PXComponentContainerViewController {
         UIApplication.shared.statusBarStyle = .default
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let dynamicViewController = viewModel.advancedConfiguration.dynamicViewControllersConfiguration?.creators[PXDynamicViewControllerPosition.DID_ENTER_REVIEW_AND_CONFIRM]?.getDynamicViewController(store: PXCheckoutStore.sharedInstance) {
+            PXComponentFactory.Modal.show(viewController: dynamicViewController, title: nil)
+        }
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if shouldAnimatePayButton {
