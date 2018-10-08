@@ -28,46 +28,9 @@
 
     self.pref = nil;
 
-    ///  PASO 1: SETEAR PREFERENCIAS
-
-    // Setear ServicePreference
-    // [self setServicePreference];
-
-    ///  PASO 2: SETEAR CHECKOUTPREF, PAYMENTDATA Y PAYMENTRESULT
-
-    // Setear una preferencia hecha a mano
-    //[self setCheckoutPref_CardsNotExcluded];
-
-    [self setCheckoutPref_WithId];
-
-/*
-    DiscountCoupon* dc = [[DiscountCoupon alloc] initWithDiscountId:123];
-    
-    NSNumber *externalDiscount = [NSNumber numberWithDouble:2.00];
-    
-    dc.name = @"Patito Off";
-    dc.coupon_amount = [externalDiscount stringValue];
-    dc.percent_off = @"10";
-    dc.currency_id = @"ARS";
-    dc.concept = @"Descuento de patito";
-    dc.amountWithoutDiscount = 50;
-    dc = nil;
-*/
-    
-
-
-    // self.pref.preferenceId = @"243962506-ca09fbc6-7fa6-461d-951c-775b37d19abc";
-    //Differential pricing
-    // self.pref.preferenceId = @"99628543-518e6477-ac0d-4f4a-8097-51c2fcc00b71";
-    /* self.mpCheckout = [[MercadoPagoCheckout alloc] initWithPublicKey:@"TEST-4763b824-93d7-4ca2-a7f7-93539c3ee5bd"
-                                                         accessToken:nil checkoutPreference:self.pref paymentData:self.paymentData paymentResult:self.paymentResult navigationController:self.navigationController]; */
-
-//    self.pref.preferenceId = @"99628543-518e6477-ac0d-4f4a-8097-51c2fcc00b71";
-//
-
     [self setCheckoutPref_CreditCardNotExcluded];
 
-self.checkoutBuilder = [[MercadoPagoCheckoutBuilder alloc] initWithPublicKey:@"TEST-c6d9b1f9-71ff-4e05-9327-3c62468a23ee" checkoutPreference:self.pref paymentConfiguration:[self getPaymentConfiguration]];
+    self.checkoutBuilder = [[MercadoPagoCheckoutBuilder alloc] initWithPublicKey:@"TEST-c6d9b1f9-71ff-4e05-9327-3c62468a23ee" checkoutPreference:self.pref paymentConfiguration:[self getPaymentConfiguration]];
 
 //    self.checkoutBuilder = [[MercadoPagoCheckoutBuilder alloc] initWithPublicKey:@"TEST-4763b824-93d7-4ca2-a7f7-93539c3ee5bd" preferenceId:@"243966003-0812580b-6082-4104-9bce-1a4c48a5bc44"];
 
@@ -92,37 +55,16 @@ self.checkoutBuilder = [[MercadoPagoCheckoutBuilder alloc] initWithPublicKey:@"T
     // Disable bank deals
     [advancedConfig setBankDealsEnabled:NO];
 
+    // Add dynamic view controllers
     [advancedConfig setDynamicViewControllersConfiguration: [TestComponent getDynamicViewControllersConfiguration]];
 
+    // Add dynamic views
     [advancedConfig setDynamicViewsConfiguration: [TestComponent getDynamicViewsConfiguration]];
 
     // Set advanced comnfig
     [self.checkoutBuilder setAdvancedConfigurationWithConfig:advancedConfig];
 
-    //[self.checkoutBuilder setPrivateKeyWithKey:@"APP_USR-1094487241196549-081708-4bc39f94fd147e7ce839c230c93261cb__LA_LC__-145698489"];
-    // CDP color.
-    // [self.checkoutComponents setDefaultColor:[UIColor colorWithRed:0.49 green:0.17 blue:0.55 alpha:1.0]];
-
-    // [self.mpCheckout discountNotAvailable];
-
-
-
-    // [self.mpCheckout setDiscount:discount withCampaign:campaign];
-
-    // CDP color.
-    //[self.mpCheckout setDefaultColor:[UIColor colorWithRed:0.49 green:0.17 blue:0.55 alpha:1.0]];
-
-    //[self setHooks];
-    
-    //[self setPaymentMethodPlugins];
-
-    //[self setPaymentPlugin];
-
-    // Setear Callback Cancel
-    // [self setVoidCallback];
-
-    // [self.mpCheckout discountNotAvailable];
-
+    // Set language
     [self.checkoutBuilder setLanguage:@"es"];
   
     MercadoPagoCheckout *mpCheckout = [[MercadoPagoCheckout alloc] initWithBuilder:self.checkoutBuilder];
@@ -168,6 +110,7 @@ self.checkoutBuilder = [[MercadoPagoCheckoutBuilder alloc] initWithPublicKey:@"T
     PXDiscount* discount = [[PXDiscount alloc] initWithId:@"34295216" name:@"nada" percentOff:20 amountOff:0 couponAmount:7 currencyId:@"ARG"];
     PXCampaign* campaign = [[PXCampaign alloc] initWithId:30959 code:@"sad" name:@"Campaña" maxCouponAmount:7];
     PXDiscountConfiguration * configDiscount = [[PXDiscountConfiguration alloc] initWithDiscount:discount campaign:campaign];
+
     [self.paymentConfig setDiscountConfigurationWithConfig:configDiscount];
 }
 
@@ -180,8 +123,6 @@ self.checkoutBuilder = [[MercadoPagoCheckoutBuilder alloc] initWithPublicKey:@"T
     [self.paymentConfig addChargeRulesWithCharges:chargesArray];
 }
 
--(void)setVoidCallback {}
-
 -(void)setCheckoutPref_CreditCardNotExcluded {
     PXItem *item = [[PXItem alloc] initWithTitle:@"title" quantity:2 unitPrice:90.0];
     PXItem *item2 = [[PXItem alloc] initWithTitle:@"title" quantity:2 unitPrice:2.0];
@@ -191,11 +132,6 @@ self.checkoutBuilder = [[MercadoPagoCheckoutBuilder alloc] initWithPublicKey:@"T
     self.pref = [[PXCheckoutPreference alloc] initWithSiteId:@"MLA" payerEmail:@"sara@gmail.com" items:items];
     [self.pref addExcludedPaymentType:@"ticket"];
 }
-
--(void)setCheckoutPref_WithId {
-    self.pref = [[PXCheckoutPreference alloc] initWithPreferenceId: @"242624092-2a26fccd-14dd-4456-9161-5f2c44532f1d"];
-}
-
 
 -(IBAction)startCardManager:(id)sender  {}
 

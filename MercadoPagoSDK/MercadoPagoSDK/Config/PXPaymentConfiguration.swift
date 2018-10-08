@@ -36,6 +36,7 @@ extension PXPaymentConfiguration {
      Add your own payment method option to pay.
      - parameter plugin: Your custom payment method plugin.
      */
+    @discardableResult
     open func addPaymentMethodPlugin(plugin: PXPaymentMethodPlugin) -> PXPaymentConfiguration {
         self.paymentMethodPlugins.append(plugin)
         return self
@@ -45,6 +46,7 @@ extension PXPaymentConfiguration {
      Add extra charges that will apply to total amount.
      - parameter charges: the list (array) of charges that could apply.
      */
+    @discardableResult
     open func addChargeRules(charges: [PXPaymentTypeChargeRule]) -> PXPaymentConfiguration {
         self.chargeRules.append(contentsOf: charges)
         return self
@@ -54,6 +56,7 @@ extension PXPaymentConfiguration {
      `PXDiscountConfiguration` is an object that represents the discount to be applied or error information to present to the user. It's mandatory to handle your discounts by hand if you set a payment processor.
      - parameter config: Your custom discount configuration
      */
+    @discardableResult
     open func setDiscountConfiguration(config: PXDiscountConfiguration) -> PXPaymentConfiguration {
         self.discountConfiguration = config
         return self
