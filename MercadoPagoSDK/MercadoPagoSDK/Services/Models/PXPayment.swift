@@ -149,7 +149,6 @@ import Foundation
      */
     open var tokenId: String?
 
-    
     /// :nodoc:
     internal init(id: Int64, status: String) {
         self.id = id
@@ -351,7 +350,7 @@ import Foundation
 }
 
 extension PXPayment {
-    //MARK: Getters that conforms PXResult protocol
+    // MARK: Getters that conforms PXResult protocol
     /**
      * Payment Id getter (String)
      */

@@ -48,7 +48,7 @@ import Foundation
                     SummaryType.SHIPPING: "Envío".localized]
         }
     }
-    
+
     internal var details: [SummaryType: SummaryDetail] = [SummaryType: SummaryDetail]()
 }
 
@@ -97,7 +97,7 @@ internal extension PXReviewConfirmConfiguration {
 // Collector icon.
 // MARK: To deprecate post v4. SP integration.
 internal extension PXReviewConfirmConfiguration {
-    open func getCollectorIcon() -> UIImage? {
+    internal func getCollectorIcon() -> UIImage? {
         return nil
     }
 }

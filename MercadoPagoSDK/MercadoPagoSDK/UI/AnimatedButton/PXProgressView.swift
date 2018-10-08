@@ -61,7 +61,7 @@ final class ProgressView: UIView {
 
         UIView.animate(withDuration: 0.3, animations: {
             self.frame = newFrame
-        }) { completed in
+        }) { _ in
             if  Double(self.timerCounter) * self.timerInterval > self.timeOut {
                 self.stopTimer()
                 self.progressDelegate?.progressTimeOut()
@@ -95,7 +95,7 @@ extension ProgressView {
         let newFrame = CGRect(x: 0, y: 0, width: progressViewEndX, height: self.frame.height)
         UIView.animate(withDuration: 0.5, animations: {
             self.frame = newFrame
-        }) { completed in
+        }) { _ in
             self.stopTimer()
             self.progressDelegate?.didFinishProgress()
             completion(true)

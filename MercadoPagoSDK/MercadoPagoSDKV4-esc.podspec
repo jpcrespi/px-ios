@@ -27,9 +27,9 @@ Pod::Spec.new do |s|
     }
   end
 
-  s.test_spec do |test_spec|
-    test_spec.source_files = 'MercadoPagoSDK/MercadoPagoSDKTests/*'
-    test_spec.frameworks = 'XCTest'
-  end
+  #s.test_spec do |test_spec|
+    #test_spec.source_files = 'MercadoPagoSDK/MercadoPagoSDKTests/*'
+    #test_spec.frameworks = 'XCTest'
+  #end
 
 end

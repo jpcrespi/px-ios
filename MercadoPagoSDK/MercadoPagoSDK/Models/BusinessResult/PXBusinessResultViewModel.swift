@@ -61,7 +61,7 @@ class PXBusinessResultViewModel: NSObject, PXResultViewModelInterface {
     func getBadgeImage() -> UIImage? {
         return ResourceManager.shared.getBadgeImageWith(status: self.businessResult.getStatus().getDescription())
     }
-    
+
     func getAttributedTitle() -> NSAttributedString {
         let title = businessResult.getTitle()
         let attributes = [NSAttributedStringKey.font: Utils.getFont(size: PXHeaderRenderer.TITLE_FONT_SIZE)]

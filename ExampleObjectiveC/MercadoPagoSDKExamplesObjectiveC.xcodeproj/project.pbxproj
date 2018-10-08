@@ -285,6 +285,7 @@
 				4B10DBC02139891C00EA2208 /* Resources */,
 				E7C38DA8B5DDC9D3EE3300A6 /* [CP] Embed Pods Frameworks */,
 				D7D9AA16663D41EB358F4F82 /* [CP] Copy Pods Resources */,
+				4B6CCC25216530DE0035A17D /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -383,6 +384,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDKExamplesObjectiveCTests/Pods-MercadoPagoSDKExamplesObjectiveCTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4B6CCC25216530DE0035A17D /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd ..\ncd MercadoPagoSDK\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		9BA1BABF394FDA2C5399C553 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -10,15 +10,15 @@ import Foundation
 /// :nodoc:
 open class PXCurrencies: NSObject {
 
-    open static let CURRENCY_ARGENTINA = "ARS"
-    open static let CURRENCY_BRAZIL = "BRL"
-    open static let CURRENCY_CHILE = "CLP"
-    open static let CURRENCY_COLOMBIA = "COP"
-    open static let CURRENCY_MEXICO = "MXN"
-    open static let CURRENCY_VENEZUELA = "VEF"
-    open static let CURRENCY_USA = "USD"
-    open static let CURRENCY_PERU = "PEN"
-    open static let CURRENCY_URUGUAY = "UYU"
+    static let CURRENCY_ARGENTINA = "ARS"
+    static let CURRENCY_BRAZIL = "BRL"
+    static let CURRENCY_CHILE = "CLP"
+    static let CURRENCY_COLOMBIA = "COP"
+    static let CURRENCY_MEXICO = "MXN"
+    static let CURRENCY_VENEZUELA = "VEF"
+    static let CURRENCY_USA = "USD"
+    static let CURRENCY_PERU = "PEN"
+    static let CURRENCY_URUGUAY = "UYU"
 
     open class var currenciesList: [String: PXCurrency] { return [
         "ARS": PXCurrency(id: "ARS", description: "Peso argentino", symbol: "$", decimalPlaces: 2, decimalSeparator: ",", thousandSeparator: "."),

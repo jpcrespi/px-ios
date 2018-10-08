@@ -19,11 +19,11 @@ open class PXGenericPayment: NSObject, PXResult {
     public func getStatus() -> String {
         return status
     }
-    
+
     public func getStatusDetail() -> String {
         return statusDetail
     }
-    
+
     /// :nodoc:
     @objc public enum RemotePaymentStatus: Int {
         case APPROVED
@@ -34,17 +34,17 @@ open class PXGenericPayment: NSObject, PXResult {
     /**
      id related to your payment.
      */
-    open let paymentId: String?
+    public let paymentId: String?
 
     /**
      Status of your payment.
      */
-    open let status: String
+    public let status: String
 
     /**
      Status detail of your payment.
      */
-    open let statusDetail: String
+    public let statusDetail: String
 
     // MARK: Init.
     /**
@@ -70,4 +70,3 @@ open class PXGenericPayment: NSObject, PXResult {
         self.paymentId = receiptId
     }
 }
-

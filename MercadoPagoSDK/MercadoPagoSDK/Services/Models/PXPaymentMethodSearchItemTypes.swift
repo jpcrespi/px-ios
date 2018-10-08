@@ -9,7 +9,7 @@
 import Foundation
 /// :nodoc:
 open class PXPaymentMethodSearchItemTypes: NSObject {
-    open static let GROUP = "group"
-    open static let PAYMENT_TYPE = "payment_type"
-    open static let PAYMENT_METHOD = "payment_method"
+    static let GROUP = "group"
+    static let PAYMENT_TYPE = "payment_type"
+    static let PAYMENT_METHOD = "payment_method"
 }
